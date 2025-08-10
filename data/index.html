@@ -1,0 +1,80 @@
+<!DOCTYPE html><html lang="pl"><head>
+<meta charset="utf-8"><title>Audi CAN GUI</title>
+<link rel="stylesheet" href="style.css">
+</head><body>
+<nav>
+  <button class="tab" data-tab="rules">Reguły</button>
+  <button class="tab" data-tab="sniffer">Sniffer</button>
+  <button class="tab" data-tab="db">Baza ramek</button>
+  <button class="tab" data-tab="help">Instrukcja</button>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+</nav>
+
+<div id="notesBox">
+  <h2>📓 Twoje notatki (widoczne zawsze)</h2>
+  <textarea id="notesArea" rows="4" placeholder="Zapisz tu wszystko – ID ramek, pomysły, TODO…"></textarea><br>
+  <button id="saveNotes">Zapisz notatki (lokalnie)</button>
+  <span id="notesMsg"></span>
+</div>
+
+<section id="rules" class="pane">
+  <h1>Reguły (prosto i jasno)</h1>
+
+  <table id="tbl"><thead>
+    <tr>
+      <th>#</th>
+      <th colspan="12">Trigger: ID + bajty (8) + maska (8)</th>
+      <th>Ile razy</th><th>Okno [ms]</th>
+      <th>Akcje: lista ramek do wysłania</th>
+      <th></th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>ID</th>
+      <th colspan="8">Dane</th>
+      <th colspan="8">Maska</th>
+      <th></th><th></th><th></th><th></th>
+    </tr>
+  </thead>
+  <tbody></tbody></table>
+  <button id="add">+ Dodaj</button>
+  <button id="save">💾 Zapisz</button>
+  <pre id="msg"></pre>
+</section>
+
+<section id="sniffer" class="pane" hidden>
+  <h1>Podgląd CAN (Sniffer)</h1>
+  <label>ID filter (hex) <input id="fid" size="6" placeholder="np. 188"></label>
+  <button id="clr">Wyczyść</button>
+  <label><input type="checkbox" id="autoscroll" checked> auto-scroll</label>
+  <button id="sniffStop">Stop</button>
+  <button id="sniffStart" disabled>Start</button>
+  <pre id="log"></pre>
+</section>
+
+<section id="db" class="pane" hidden>
+  <h1>Słownik ramek VAG</h1>
+  <label>Szukaj <input id="q" placeholder="ID lub słowo"></label>
+  <h3>Dodaj własną ramkę do bazy</h3>
+  <label>ID hex <input id="newId" size="6"></label>
+  <label>Opis <input id="newDesc" size="30"></label>
+  <button id="addCustom">Dodaj</button>
+  <span id="dbMsg"></span>
+  <table id="tblDB"><thead><tr><th>ID</th><th>Opis</th></tr></thead><tbody></tbody></table>
+</section>
+
+<script src="script.js" defer></script>
+
+<section id="help" class="pane" hidden>
+<div class="helpBox">
+  <h2 style="color:#000">Jak to działa (wersja dla totalnie początkujących):</h2>
+  <ol style="color:#000">
+    <li>Ten mały moduł <b>podsłuchuje linie CAN</b> w Twoim aucie.</li>
+    <li>Kiedy wykryje <b>określoną ramkę</b> (komunikat), może <b>odpowiedzieć własnymi ramkami</b>.</li>
+    <li>Dzięki temu możesz np. <b>otworzyć dach</b>, <b>mrugnąć światłami</b> itp.</li>
+    <li>Wszystko ustawiasz w <b>poniższej tabeli</b> – <u>żadne programowanie nie jest potrzebne</u>.</li>
+    <li>Po każdym kliknięciu 💾 <strong>Zapisz</strong> urządzenie <b>natychmiast</b> używa nowych ustawień.</li>
+  </ol>
+</div>
+</section>
+</body></html>

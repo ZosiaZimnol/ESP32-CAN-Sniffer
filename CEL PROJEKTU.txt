@@ -1,0 +1,71 @@
+
+Stworzyć programowalny moduł CAN na ESP32, który pozwala:
+
+Nasłuchiwać ruch CAN (sniffer, logowanie ramek w czasie rzeczywistym)
+
+Automatycznie reagować na wybrane ramki (reguły trigger-action)
+
+Wysyłać własne ramki/sekwencje na żądanie (manualnie lub automatycznie)
+
+Konfigurować całość przez przeglądarkę (WiFi Access Point, web GUI, pliki konfiguracyjne)
+
+Stosowany np. do obsługi funkcji komfortu, automatyzacji, testów, własnych akcji na magistrali CAN w samochodzie.
+
+Podstawowe funkcje
+1. Sniffer CAN
+Odbiera każdą ramkę z CAN.
+
+Wysyła podgląd na WebSocket (/sniff), więc na stronie/aplikacji można śledzić CAN live.
+
+2. Reguły Trigger-Action
+Pozwala ustawić reguły: kiedy przyjdzie konkretna ramka CAN (trigger), automatycznie zostanie wysłana inna ramka/sekwencja (action).
+
+Reguły zapisane są w pliku /config.json.
+
+Możesz dodawać/edytować reguły przez web GUI (endpoint /cfg).
+
+3. Wysyłanie ramek CAN
+Możesz wysyłać pojedyncze ramki lub całe sekwencje przez GUI (endpoint /tx) lub przez reguły.
+
+Każda ramka ma ID, dane, długość, powtórzenia, opóźnienia – wszystko konfigurowalne.
+
+4. Show mode
+Służy do uruchamiania zdefiniowanych sekwencji testowych lub pokazowych (np. test świateł, animacja).
+
+Uruchamiasz przez GUI lub za pomocą ramki CAN
+
+Łatwo przerobić pod dowolny pokaz – wystarczy zmienić sekwencję ramek w GUI.
+
+5. Notatki i dane użytkownika (MOZNA WYJEBAĆ)
+Możesz zapisywać notatki i własne dane (endpointy /notes i /userdb).
+
+Konfiguracja i obsługa
+Po starcie ESP32 tworzy WiFi AP:
+SSID: CanFlex
+Hasło: 12345678
+
+Web GUI dostępne po połączeniu z siecią – konfiguracja wszystkiego przez przeglądarkę.
+
+Możliwość wyłączenia hotspotu przyciskiem lub przez GUI
+
+Najważniejsze endpointy:
+/cfg – konfiguracja reguł (GET/POST, JSON)
+
+/userdb – dane użytkownika (GET/POST)
+
+/notes – notatki (GET/POST)
+
+/tx – wysyłanie własnej ramki (POST, JSON)
+
+/show – pokaz sekwencji testowej (POST)
+
+/sniff – WebSocket do podglądu ramek CAN live
+
+
+Podsumowanie
+Moduł pozwala robić własne automaty na CAN – możesz ustawić dowolną reakcję na dowolny ruch na magistrali.
+
+Całość obsługujesz przez WiFi i przeglądarkę 
+Kod jest modularny i łatwy do rozbudowy.(najlepiej ale nie koniecznie)
+
+Notatki, dane i konfiguracje trzymane są na flashu.(mogą być w jakiś sposób zapisywalne na telefone lub kompie)

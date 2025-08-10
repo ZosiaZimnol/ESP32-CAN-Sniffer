@@ -1,0 +1,14 @@
+{
+  "0x158": "Vehicle speed (PQ35)",
+  "0x17C": "Engine RPM (MQB/PQ)",
+  "0x188": "Remote key / central locking",
+  "0x190": "Comfort-CAN: lock/unlock status",
+  "0x1A0": "ABS wheel speeds sum",
+  "0x204": "Accelerator pedal",
+  "0x3C0": "Steering-angle sensor (G85)",
+  "0x461": "RNS-E button press",
+  "0x553": "Door/boot status",
+  "0x5C0": "Roof/Cabrio status",
+  "0x680": "Head-unit text \u2192 cluster",
+  "0x681": "Cluster ACK \u2192 head-unit"
+}
